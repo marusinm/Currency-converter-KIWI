@@ -11,7 +11,9 @@ docker build -t kiwi_task .
 docker run -p 80:80 kiwi_task
 ```
 Or you can download it from Docker Hub
-```docker run -p 80:80 marusinm/currency_converter:ver1```
+```
+docker run -p 80:80 marusinm/currency_converter:v1
+```
 
 ### Run it on localhost
 Use run.sh for unix base systems or just enter /task folder and run currency_converter.py as python script 
@@ -27,6 +29,7 @@ pip3 install flask
 
 - CLI application
 - web API application
+- download currencies rates from https://www.exchangerate-api.com/
 
 ## Parameters
 - `amount` - amount which we want to convert - float

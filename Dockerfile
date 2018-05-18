@@ -17,4 +17,4 @@ EXPOSE 80
 ENV NAME kiwi_task_marusinm
 
 # Run app.py when the container launches
-CMD ["python", "./task/currency_converter.py"]
+CMD ["python", "currency_converter.py"]

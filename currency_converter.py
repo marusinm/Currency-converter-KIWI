@@ -84,7 +84,7 @@ def convert(amount, input_currency, output_currency):
 # example python3.6 currency_converter.py --amount 10 --input_currency EUR --output_currency CZK
 # python3.6 currency_converter.py --amount 10 --input_currency € --output_currency CZK
 if __name__ == "__main__":
-    # app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=80)
 
     amount, input_currency, output_currency = parse_options(sys.argv[1:])
     print(json.dumps((convert(amount, input_currency, output_currency)), indent=4, sort_keys=True))
