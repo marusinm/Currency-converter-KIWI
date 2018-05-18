@@ -17,7 +17,4 @@ EXPOSE 80
 ENV NAME kiwi_task_marusinm
 
 # Run app.py when the container launches
-CMD ["python", "app.py"]
-
-#container runs while some process exists (there we start bash)
-# CMD /bin/bash 
+CMD ["python", "./task/currency_converter.py"]
