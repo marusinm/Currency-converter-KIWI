@@ -40,7 +40,8 @@ For more scroll to 'Examples' section
 
 - CLI application
 - web API application
-- download currencies rates from https://www.exchangerate-api.com/
+- app requests for currencies rates from https://www.exchangerate-api.com/
+- app requests for currencies codes and symbols from https://free.currencyconverterapi.com 
 
 ## Parameters
 - `amount` - amount which we want to convert - float
