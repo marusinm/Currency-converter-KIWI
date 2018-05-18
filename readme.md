@@ -24,7 +24,7 @@ Or you can pull and run it from Docker Hub
 ```
 docker run -p 80:80 marusinm/currency_converter:v1
 ```
-Then you can check output in your browser on localhost address for example ```http://localhost/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK```
+Then you can check output in your browser on localhost address for example <br /> ```http://localhost/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK``` <br />
 For more scroll to 'Examples' section
 
 ### Run it on localhost
@@ -32,7 +32,7 @@ Use run.sh for unix base systems
 ```
 ./run.sh
 ```
-Then you can check output in your browser on localhost address for example ```http://localhost:5000/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK```
+Then you can check output in your browser on localhost address for example <br /> ```http://localhost:5000/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK``` <br />
 For more scroll to 'Examples' section
 
 
