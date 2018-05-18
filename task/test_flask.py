@@ -54,6 +54,18 @@ json = {
 def get_json():
     return jsonify(json)
 
+# example: GET /currency_converter?amount=10.0&input_currency=€&output_currency=CZK HTTP/1.1
+@app.route('/currency_converter')
+def currency_converter():
+    # print(amount = request.args.get('amount', type=float))
+    # print(input_currency = request.args.get('input_currency', type=str))
+    # print(output_currency = request.args.get('output_currency', default='', type=str))
+    amount=request.args['amount']
+    input_currency=request.args['input_currency']
+    output_currency=request.args['output_currency']
+
+    return 'amount: ' + amount + " input_currency: " + input_currency + " output_currency: " + output_currency
+
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=80)
