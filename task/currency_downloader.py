@@ -1,28 +1,6 @@
 import sys
 import requests
 
-
-#
-# codes_symbols = {'ALL': 'Lek', 'XCD': '$', 'EUR': '€', 'BBD': '$', 'BTN': '-', 'BND': '$', 'XAF': '-', 'CUP': '$', 'USD': '$',
-#         'FKP': '£', 'GIP': '£', 'HUF': 'Ft', 'IRR': '﷼', 'JMD': 'J$', 'AUD': '$', 'LAK': '₭', 'LYD': '-', 'MKD': 'ден',
-#         'XOF': '-', 'NZD': '$', 'OMR': '﷼', 'PGK': '-', 'RWF': '-', 'WST': '-', 'RSD': 'Дин.', 'SEK': 'kr',
-#         'TZS': 'TSh', 'AMD': '-', 'BSD': '$', 'BAM': 'KM', 'CVE': '-', 'CNY': '¥', 'CRC': '₡', 'CZK': 'Kč', 'ERN': '-',
-#         'GEL': '-', 'HTG': '-', 'INR': '₹', 'JOD': '-', 'KRW': '₩', 'LBP': '£', 'MWK': '-', 'MRO': '-', 'MZN': '-',
-#                  'ANG': 'ƒ', 'PEN': 'S/.', 'QAR': '﷼', 'STD': '-', 'SLL': '-', 'SOS': 'S', 'SDG': '-', 'SYP': '£', 'AOA': '-',
-#                  'AWG': 'ƒ', 'BHD': '-', 'BZD': 'BZ$', 'BWP': 'P', 'BIF': '-', 'KYD': '$', 'COP': '$', 'DKK': 'kr', 'GTQ': 'Q',
-#                  'HNL': 'L', 'IDR': 'Rp', 'ILS': '₪', 'KZT': 'лв', 'KWD': '-', 'LSL': '-', 'MYR': 'RM', 'MUR': '₨', 'MNT': '₮',
-#                  'MMK': '-', 'NGN': '₦', 'PAB': 'B/.', 'PHP': '₱', 'RON': 'lei', 'SAR': '﷼', 'SGD': '$', 'ZAR': 'R', 'SRD': '$',
-#                  'TWD': 'NT$', 'TOP': '-', 'VEF': '-', 'DZD': '-', 'ARS': '$', 'AZN': 'ман', 'BYR': 'p.', 'BOB': '$b',
-#                  'BGN': 'лв', 'CAD': '$', 'CLP': '$', 'CDF': '-', 'DOP': 'RD$', 'FJD': '$', 'GMD': '-', 'GYD': '$', 'ISK': 'kr',
-#                  'IQD': '-', 'JPY': '¥', 'KPW': '₩', 'LVL': 'Ls', 'CHF': 'Fr.', 'MGA': '-', 'MDL': '-', 'MAD': '-', 'NPR': '₨',
-#                  'NIO': 'C$', 'PKR': '₨', 'PYG': 'Gs', 'SHP': '£', 'SCR': '₨', 'SBD': '$', 'LKR': '₨', 'THB': '฿', 'TRY': '-',
-#                  'AED': '-', 'VUV': '-', 'YER': '﷼', 'AFN': '؋', 'BDT': '-', 'BRL': 'R$', 'KHR': '៛', 'KMF': '-', 'HRK': 'kn',
-#                  'DJF': '-', 'EGP': '£', 'ETB': '-', 'XPF': '-', 'GHS': '-', 'GNF': '-', 'HKD': '$', 'XDR': '-', 'KES': 'KSh',
-#                  'KGS': 'лв', 'LRD': '$', 'MOP': '-', 'MVR': '-', 'MXN': '$', 'NAD': '$', 'NOK': 'kr', 'PLN': 'zł', 'RUB': 'руб',
-#                  'SZL': '-', 'TJS': '-', 'TTD': 'TT$', 'UGX': 'USh', 'UYU': '$U', 'VND': '₫', 'TND': '-', 'UAH': '₴',
-#                  'UZS': 'лв', 'TMT': '-', 'GBP': '£', 'ZMW': '-', 'BTC': 'BTC', 'BYN': 'p.'}
-
-
 class CurrencyDownloader:
     """Working with rest API to get currency rates"""
 
@@ -97,11 +75,6 @@ class CurrencyDownloader:
         :return: float number of exchange rate
         """
         try:
-            # response = requests.get(
-            #     "http://data.fixer.io/api/latest?access_key=3ab64743315376e9f5989fafad92b597&base=" +
-            #     self.from_currency +
-            #     "&symbols=" +
-            #     self.to_currency)
             response = requests.get(
                 "https://v3.exchangerate-api.com/bulk/5c110b20b14a95d3a024be2d/" + self.from_currency)
             response.raise_for_status()
@@ -120,15 +93,6 @@ class CurrencyDownloader:
         :return: dict of currencies codes and their rates
         """
         try:
-            # url_params = ''
-            # for key in self.codes_symbols:
-            #     url_params += key + ','
-            #
-            # response = requests.get(
-            #     "http://data.fixer.io/api/latest?access_key=3ab64743315376e9f5989fafad92b597&base=" +
-            #     self.from_currency +
-            #     "&symbols=" +
-            #     url_params)
             response = requests.get(
                 "https://v3.exchangerate-api.com/bulk/5c110b20b14a95d3a024be2d/"+self.from_currency)
             response.raise_for_status()
