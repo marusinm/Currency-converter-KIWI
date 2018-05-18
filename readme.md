@@ -1,7 +1,17 @@
 # Currency-converter-KIWI
 Kiwi junior python developer task
 
-## How to run it (use Docker of run it on localhost)
+## How to run it CLI app
+```
+# install packages
+pip3 install requests
+pip3 install flask
+
+python3 currency_converter.py --amount <amount> --input_currency <input_currency> [--output_currency <output_currency>]
+```
+For more scroll to 'Examples' section 
+
+## How to run API 
 
 ### Docker
 
@@ -10,20 +20,21 @@ You can use pre-prepared Dockerfile for example:
 docker build -t kiwi_task .
 docker run -p 80:80 kiwi_task
 ```
-Or you can download it from Docker Hub
+Or you can pull and run it from Docker Hub
 ```
 docker run -p 80:80 marusinm/currency_converter:v1
 ```
+Then you can check output in your browser on localhost address for example ```http://localhost/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK```
+For more scroll to 'Examples' section
 
 ### Run it on localhost
-Use run.sh for unix base systems or just enter /task folder and run currency_converter.py as python script 
+Use run.sh for unix base systems 
 ```
-# install packages
-pip3 install requests
-pip3 install flask
-
 ./run.sh
 ```
+Then you can check output in your browser on localhost address for example ```http://localhost:5000/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK```
+For more scroll to 'Examples' section
+
 
 ## App contains
 
@@ -56,7 +67,7 @@ pip3 install flask
 
 ### CLI
 ```
-./currency_converter.py --amount 100.0 --input_currency EUR --output_currency CZK
+python3 currency_converter.py --amount 100.0 --input_currency EUR --output_currency CZK
 {
     "input": {
         "amount": 100.0,
@@ -68,7 +79,7 @@ pip3 install flask
 }
 ```
 ```
-./currency_converter.py --amount 0.9 --input_currency ¥ --output_currency AUD
+python3 currency_converter.py --amount 0.9 --input_currency ¥ --output_currency AUD
 {
     "input": {
         "amount": 0.9,
@@ -80,7 +91,7 @@ pip3 install flask
 }
 ```
 ```
-./currency_converter.py --amount 10.92 --input_currency £
+python3 currency_converter.py --amount 10.92 --input_currency £
 {
     "input": {
         "amount": 10.92,

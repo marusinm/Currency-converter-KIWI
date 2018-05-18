@@ -131,3 +131,27 @@ class CurrencyDownloader:
         for key in codes_signs:
             codes_signs[key] = float(codes_signs[key]) * float(self.amount)
         return codes_signs
+
+    def convert(self, amount, input_currency, output_currency):
+        """
+        Converts amount from one input_currency to output_currency
+        :param amount float to convert
+        :param input_currency: from_currency
+        :param output_currency: to_currency
+        :return: dictionary of data which look like json outpus
+        """
+
+        if output_currency != '':
+            data = self.convert_single_currency()
+        else:
+            data = self.convert_multiple_currencies()
+
+        json_output = {
+            "input": {
+                "amount": amount,
+                "currency": self.get_input_currency_code()
+            },
+            "output": data
+        }
+
+        return json_output
