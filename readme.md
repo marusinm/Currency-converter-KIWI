@@ -1,5 +1,5 @@
 # Currency-converter-KIWI
-kiwi junior python developer task
+Kiwi junior python developer task
 
 ## How to run it (use Docker of run it on localhost)
 
@@ -11,6 +11,7 @@ docker build -t kiwi_task .
 docker run -p 80:80 kiwi_task
 ```
 Or you can download it from Docker Hub
+```docker run -p 80:80 marusinm/currency_converter:ver1```
 
 ### Run it on localhost
 Use run.sh for unix base systems or just enter /task folder and run currency_converter.py as python script 
@@ -22,7 +23,7 @@ pip3 install flask
 ./run.sh
 ```
 
-## App contains?
+## App contains
 
 - CLI application
 - web API application
