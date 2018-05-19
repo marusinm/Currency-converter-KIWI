@@ -1,7 +1,7 @@
 # Currency-converter-KIWI
 Kiwi junior python developer task
 
-## How to run it CLI app
+## How to run CLI app
 ```
 # install packages
 pip3 install requests
@@ -9,9 +9,9 @@ pip3 install flask
 
 python3 currency_converter.py --amount <amount> --input_currency <input_currency> [--output_currency <output_currency>]
 ```
-For more scroll to 'Examples' section 
+For more samples scroll to 'Examples' section 
 
-## How to run API 
+## How to run API part
 
 ### Docker
 
@@ -24,24 +24,24 @@ Or you can pull and run it from Docker Hub
 ```
 docker run -p 80:80 marusinm/currency_converter:v1
 ```
-Then you can check output in your browser on localhost address for example <br /> ```http://localhost/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK``` <br />
-For more scroll to 'Examples' section
+Then you can check outputs in your browser on localhost address. For example <br /> ```http://localhost/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK``` <br />
+For more samples scroll to 'Examples' section 
 
 ### Run it on localhost
 Use run.sh for unix base systems 
 ```
 ./run.sh
 ```
-Then you can check output in your browser on localhost address for example <br /> ```http://localhost:5000/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK``` <br />
-For more scroll to 'Examples' section
+Then you can check outputs in your browser on localhost address. For example <br /> ```http://localhost:5000/currency_converter?amount=1&input_currency=%E2%82%AC&output_currency=CZK``` <br />
+For more samples scroll to 'Examples' section 
 
 
 ## App contains
 
 - CLI application
 - web API application
-- app requests for currencies rates from https://www.exchangerate-api.com/
-- app requests for currencies codes and symbols from https://free.currencyconverterapi.com 
+- scripts request for currencies rates from https://www.exchangerate-api.com/
+- scripts request for currencies codes and symbols from https://free.currencyconverterapi.com 
 
 ## Parameters
 - `amount` - amount which we want to convert - float
