@@ -3,8 +3,8 @@
 import sys
 import getopt
 import json
-from flask import Flask, request, jsonify
 from currency_downloader import CurrencyDownloader
+
 
 def parse_options(argv):
     """

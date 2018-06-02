@@ -22,7 +22,7 @@ docker run -p 80:80 kiwi_task
 ```
 Or you can pull and run it from Docker Hub
 ```
-docker run -p 80:80 marusinm/currency_converter:v2
+docker run -p 80:80 marusinm/currency_converter:v3
 ```
 Then you can check outputs in your browser on localhost address. For example <br /> ```http://localhost/currency_converter?amount=1&input_currency=€&output_currency=CZK``` <br />
 For more samples scroll to 'Examples' section 
