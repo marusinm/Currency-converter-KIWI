@@ -1,8 +1,12 @@
 import sys
 import requests
 
+
 class CurrencyDownloader:
     """Working with rest API to get currency rates"""
+
+    BASE_URL = 'https://v3.exchangerate-api.com/bulk/5c110b20b14a95d3a024be2d/'
+    CODES_SIGNS_URL = 'https://free.currencyconverterapi.com/api/v5/currencies'
 
     def __init__(self, amount, from_currency, to_currency):
         """
@@ -12,38 +16,22 @@ class CurrencyDownloader:
         :param amount: amount to convert
         """
         self.amount = amount
-        self.from_currency = from_currency
-        self.to_currency = to_currency
 
         # download all currencies and parse their codes and symbols into dict
-        self.codes_symbols = self.get_codes_and_signs(self.get_all_currencies())
+        self.codes_symbols = self.__get_codes_and_signs(self.__get_all_currencies())
 
-        # check validity of from_currency code or symbol
-        if from_currency not in self.codes_symbols.keys():
-            if from_currency not in self.codes_symbols.values():
-                print("'From' currency code or symbol doesn't exists!")
-                sys.exit()
-            else:
-                for key, value in self.codes_symbols.items():
-                    if value == from_currency:
-                        self.from_currency = key
+        self.from_currency = self.__is_currency_valid(from_currency)
+        self.to_currency = self.__is_currency_valid(to_currency)
 
-        # check validity of from_currency code or symbol
-        if to_currency != '':  # to_currency can be empty
-            if to_currency not in self.codes_symbols.keys():
-                if to_currency not in self.codes_symbols.values():
-                    print("'To' currency code or symbol doesn't exists!")
-                    sys.exit()
-                else:
-                    for key, value in self.codes_symbols.items():
-                        if value == to_currency:
-                            self.to_currency = key
+        if self.from_currency is None or self.to_currency is None:
+            print("'From/To' currency code or symbol doesn't exists!")
+            sys.exit()
+        return
 
-    @staticmethod
-    def get_all_currencies():
+    def __get_all_currencies(self):
         """Get all available currencies and parse it to readable format"""
         try:
-            response = requests.get('https://free.currencyconverterapi.com/api/v5/currencies')
+            response = requests.get(self.CODES_SIGNS_URL)
             response.raise_for_status()
         except requests.exceptions.HTTPError as err:
             print(err)
@@ -52,8 +40,7 @@ class CurrencyDownloader:
         data = response.json()
         return data
 
-    @staticmethod
-    def get_codes_and_signs(data):
+    def __get_codes_and_signs(self, data):
         """
         Get currencies codes and symbols from json input
         :param data: json data
@@ -69,15 +56,34 @@ class CurrencyDownloader:
 
         return codes_signs
 
-    def __get_single_currency_rate(self):
+    def __is_currency_valid(self, currency):
         """
-        Get exchange rate of self.from_currency to self.to_currency
-        :return: float number of exchange rate
+        Checks if currency code or sign exist for this class
+        :param currency: currency to be checked
+        :return: currency code, None otherwise
+        """
+        if currency == '':  # to_currency can be empty
+            return ''
+
+        if currency not in self.codes_symbols.keys():
+            if currency not in self.codes_symbols.values():
+                return None
+            else:  # that mean we have just currency symbol but we need work with currency code - find it
+                for key, value in self.codes_symbols.items():
+                    if value == currency:
+                        currency = key
+
+        return currency
+
+    def __get_currency_rate(self, currency=None):
+        """
+        Get exchange rate of self.from_currency to currency if defined (all currencies otherwise)
+        :param currency: currency or None
+        :return: dict of currencies codes and their rates or single float number of exchange rate
         """
         try:
             response = requests.get(
-                "https://v3.exchangerate-api.com/bulk/5c110b20b14a95d3a024be2d/" + self.from_currency)
-            response.raise_for_status()
+                self.BASE_URL + self.from_currency)
             response.raise_for_status()
         except requests.exceptions.HTTPError as err:
             print(err)
@@ -85,24 +91,10 @@ class CurrencyDownloader:
 
         # example: {"success":true,"timestamp":1526562187,"base":"EUR","date":"2018-05-17","rates":{"USD":1.181191}}
         data = response.json()
-        return data['rates'][self.to_currency]
-
-    def __get_multiple_currency_rate(self):
-        """
-        Get exchange rates of self.from_currency to every other currencies
-        :return: dict of currencies codes and their rates
-        """
-        try:
-            response = requests.get(
-                "https://v3.exchangerate-api.com/bulk/5c110b20b14a95d3a024be2d/"+self.from_currency)
-            response.raise_for_status()
-        except requests.exceptions.HTTPError as err:
-            print(err)
-            sys.exit(1)
-
-        # example: {"success":true,"timestamp":1526562187,"base":"EUR","date":"2018-05-17","rates":{"USD":1.181191}}
-        data = response.json()
-        return data['rates']
+        if currency is None:
+            return data['rates']
+        else:
+            return data['rates'][currency]
 
     def show_saved_codes_and_symbols(self):
         """
@@ -119,7 +111,7 @@ class CurrencyDownloader:
         Convert self.amount from one currency to another
         :return: singe float number
         """
-        converted_num = float(self.amount) * float(self.__get_single_currency_rate())
+        converted_num = float(self.amount) * float(self.__get_currency_rate(self.to_currency))
         return {self.to_currency: converted_num}
 
     def convert_multiple_currencies(self):
@@ -127,7 +119,7 @@ class CurrencyDownloader:
         Convert self.amount from one currency to all others currencies
         :return: dict of converted amounts for every currency code
         """
-        codes_signs = self.__get_multiple_currency_rate()
+        codes_signs = self.__get_currency_rate()
         for key in codes_signs:
             codes_signs[key] = float(codes_signs[key]) * float(self.amount)
         return codes_signs
